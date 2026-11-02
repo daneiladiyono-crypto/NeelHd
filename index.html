@@ -3,187 +3,244 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#09051a">
 <title>Neel HD – Ubah Foto &amp; Video Jadi HD</title>
 <meta name="description" content="Tingkatkan kualitas foto dan video menjadi HD hanya dengan beberapa klik.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f3f6f9;--card:#fff;--ink:#10222f;--mut:#5d7080;--line:#dde5ec;--pri:#0b7f82;--pri2:#1c64a8;--soft:#e2f2f2;--ok:#117a4d;--bad:#b3261e;--shadow:0 10px 30px rgba(16,34,47,.08)}
-@media(prefers-color-scheme:dark){:root{--bg:#0c1720;--card:#132430;--ink:#e8f1f6;--mut:#93a8b6;--line:#23394a;--pri:#2fb9b5;--pri2:#4a9be0;--soft:#17343a;--ok:#5fd6a0;--bad:#ff8a80;--shadow:0 10px 30px rgba(0,0,0,.35)}}
+:root{--bg:#09051a;--panel:rgba(36,21,80,.5);--line:#3a2a7c;--ink:#f4f1ff;--mut:#a79fd2;--pri:#7c3aed;--pri2:#a066ff;--glow:0 0 22px rgba(124,58,237,.4)}
 *{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font:400 16px/1.6 "Plus Jakarta Sans",system-ui,sans-serif;padding-bottom:env(safe-area-inset-bottom)}
-button,input,select{font:inherit;color:inherit}
+html{scroll-behavior:smooth;color-scheme:dark}
+body{background:radial-gradient(1000px 520px at 85% -8%,#2b1264,transparent 62%),var(--bg);color:var(--ink);font:400 16px/1.6 "Plus Jakarta Sans",system-ui,sans-serif;min-height:100vh}
+button,input{font:inherit;color:inherit}
 button{cursor:pointer}
-a{color:inherit}
-:focus-visible{outline:3px solid var(--pri);outline-offset:2px}
-.wrap{max-width:980px;margin:0 auto;padding:0 20px}
-header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;height:62px}
-.logo{font-weight:800;font-size:1.3rem;text-decoration:none;display:flex;align-items:center;gap:8px}
-.logo i{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--pri),var(--pri2));display:grid;place-items:center;color:#fff;font:800 .8rem/1 "Plus Jakarta Sans";font-style:normal}
-.menu{display:flex;gap:4px}
-.menu a{padding:8px 14px;border-radius:999px;text-decoration:none;font-weight:600;font-size:.95rem;color:var(--mut)}
-.menu a:hover,.menu a.on{background:var(--soft);color:var(--pri)}
-.hero{text-align:center;padding:44px 0 26px}
-.hero h1{font-weight:800;font-size:clamp(1.9rem,5.5vw,3rem);line-height:1.15;letter-spacing:-.02em;max-width:18ch;margin:0 auto 14px}
-.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--pri),var(--pri2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p{color:var(--mut);max-width:52ch;margin:0 auto}
-.tool{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:22px;margin-bottom:34px}
-.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--bg);border-radius:16px;padding:5px;margin-bottom:20px}
-.seg button{border:0;background:none;padding:12px;border-radius:12px;font-weight:600;color:var(--mut)}
-.seg button.on{background:var(--card);color:var(--pri);box-shadow:0 2px 8px rgba(16,34,47,.12)}
-.step{display:flex;align-items:center;gap:10px;font-weight:600;margin:0 0 10px}
-.step b{width:26px;height:26px;border-radius:50%;background:var(--pri);color:#fff;display:grid;place-items:center;font-size:.8rem}
+a{color:inherit;text-decoration:none}
+svg{width:1em;height:1em;fill:currentColor;flex:none}
+:focus-visible{outline:3px solid var(--pri2);outline-offset:2px}
 [hidden]{display:none!important}
-.drop{display:block;border:2px dashed var(--line);border-radius:18px;padding:28px 16px;text-align:center;cursor:pointer;background:var(--bg);transition:.15s}
-.drop:hover,.drop.over{border-color:var(--pri);background:var(--soft)}
-.drop strong{display:block;font-size:1.05rem}
-.drop small{color:var(--mut)}
-.drop .pv{max-height:180px;max-width:100%;border-radius:12px;margin-bottom:10px}
-.or{display:flex;align-items:center;gap:12px;color:var(--mut);font-size:.85rem;margin:14px 0}
+.shell{display:grid;grid-template-columns:250px 1fr;gap:20px;max-width:1280px;margin:0 auto;padding:18px}
+.side{position:sticky;top:18px;align-self:start;height:calc(100vh - 36px);background:var(--panel);border:1px solid var(--line);border-radius:26px;padding:26px 14px;display:flex;flex-direction:column;gap:26px}
+.logo{display:flex;flex-direction:column;align-items:center;gap:6px;white-space:nowrap}
+.logo i{width:54px;height:54px;border-radius:16px;background:linear-gradient(135deg,#5b21d6,#a066ff);display:grid;place-items:center;font:800 1.6rem/1 "Plus Jakarta Sans";font-style:normal;box-shadow:var(--glow)}
+.logo b{font-weight:800;font-size:1.5rem;line-height:1}
+.logo b em{font-style:normal;color:var(--pri2)}
+.logo small{color:var(--mut);font-size:.85rem}
+.menu{display:flex;flex-direction:column;gap:6px}
+.menu a{display:flex;gap:12px;align-items:center;padding:13px 16px;border-radius:14px;color:var(--mut);font-weight:600;white-space:nowrap;border:1px solid transparent}
+.menu a svg{font-size:22px}
+.menu a.on{background:rgba(124,58,237,.22);border-color:var(--pri2);color:#fff;box-shadow:var(--glow)}
+main{min-width:0}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center;margin-bottom:20px}
+.hero small{color:var(--mut);font-size:1.15rem}
+.hero h1{font-weight:800;font-size:clamp(2rem,5.5vw,3.5rem);line-height:1.1;letter-spacing:-.02em;margin:4px 0 14px}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,#8b5cf6,#d19bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--mut);max-width:46ch}
+.art{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--glow);line-height:0}
+.art svg{width:100%;height:auto;max-height:230px;display:block}
+.badge{position:absolute;right:12px;bottom:12px;background:rgba(20,8,50,.85);border:1px solid var(--pri2);border-radius:14px;padding:8px 14px;line-height:1.2;font-size:.8rem;color:var(--mut)}
+.badge b{display:block;font-size:1.4rem;color:#c9a2ff}
+.cols{display:grid;gap:20px;grid-template-columns:1.3fr 1fr;grid-template-areas:"drop set" "prev why";align-items:start}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:22px}
+.panel h2{font-size:1.1rem;font-weight:600;display:flex;gap:10px;align-items:center;margin-bottom:14px}
+.panel h2 svg{color:var(--pri2);font-size:22px}
+.a-drop{grid-area:drop}.a-set{grid-area:set}.a-prev{grid-area:prev}.a-why{grid-area:why}
+.drop{border:2px dashed #5b46b5;border-radius:18px;padding:24px 14px;text-align:center;background:rgba(10,5,30,.4);transition:.15s}
+.drop.over{border-color:var(--pri2);background:rgba(124,58,237,.18)}
+.drop>div>svg{font-size:64px;color:var(--pri2)}
+.drop strong{display:block;font-size:1.1rem;font-weight:600}
+.drop small{display:block;color:var(--mut)}
+.pvi{max-height:150px;max-width:100%;border-radius:12px;margin-bottom:10px}
+.pick{display:inline-flex;gap:8px;align-items:center;margin:12px 0 10px;height:46px;padding:0 26px;border-radius:999px;background:linear-gradient(135deg,#6d28d9,#9d5cff);font-weight:600;cursor:pointer;box-shadow:var(--glow)}
+.hint{color:var(--mut);font-size:.85rem}
+.or{display:flex;align-items:center;gap:12px;color:var(--mut);font-size:.85rem;margin:14px 0 10px}
 .or:before,.or:after{content:"";flex:1;height:1px;background:var(--line)}
-input[type=url],select{width:100%;height:48px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);padding:0 14px}
-.row{display:grid;gap:14px;margin-top:22px}
-.go{width:100%;height:56px;border:0;border-radius:16px;background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;font-weight:800;font-size:1.05rem;display:flex;justify-content:center;align-items:center;gap:10px}
+input[type=url]{width:100%;height:48px;border-radius:14px;border:1.5px solid var(--line);background:rgba(10,5,30,.5);padding:0 14px;outline:0}
+input[type=url]:focus{border-color:var(--pri2)}
+.lab{color:var(--mut);font-weight:600;margin-bottom:8px}
+.q{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:6px}
+.q button{height:44px;border-radius:12px;border:1px solid var(--line);background:rgba(10,5,30,.5);color:var(--mut);font-weight:600}
+.q button.on{border-color:var(--pri2);background:rgba(124,58,237,.3);color:#fff;box-shadow:var(--glow)}
+.note{color:var(--mut);font-size:.95rem;background:rgba(10,5,30,.4);border-radius:14px;padding:14px}
+.go{width:100%;height:58px;margin-top:18px;border:0;border-radius:16px;background:linear-gradient(135deg,#6d28d9,#9d5cff);color:#fff;font-weight:800;font-size:1.05rem;display:flex;justify-content:center;align-items:center;gap:10px;box-shadow:var(--glow)}
 .go:disabled{opacity:.6;cursor:wait}
 .spin{width:20px;height:20px;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:sp .8s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
-.msg{margin-top:14px;padding:12px 16px;border-radius:12px;background:var(--soft);font-size:.95rem}
-.msg.err{background:color-mix(in srgb,var(--bad) 12%,transparent);color:var(--bad)}
+.msg{margin-top:14px;padding:12px 16px;border-radius:12px;background:rgba(124,58,237,.18);font-size:.95rem}
+.msg.err{background:rgba(255,90,90,.14);color:#ff9a9a}
 details{margin-top:8px;font-size:.85rem;color:var(--mut)}
-pre{white-space:pre-wrap;word-break:break-all;background:var(--bg);padding:10px;border-radius:10px;margin-top:6px;max-height:160px;overflow:auto}
-#out{margin-top:22px}
-#out h2{font-size:1.2rem;margin-bottom:12px}
-.cmp{position:relative;border-radius:16px;overflow:hidden;line-height:0;background:var(--bg);--p:50%;user-select:none}
+pre{white-space:pre-wrap;word-break:break-all;background:rgba(0,0,0,.35);padding:10px;border-radius:10px;margin-top:6px;max-height:160px;overflow:auto}
+.ph{display:grid;place-items:center;min-height:170px;color:var(--mut);text-align:center;border-radius:16px;background:rgba(10,5,30,.4)}
+.o img,.o video{width:100%;max-height:340px;object-fit:contain;border-radius:16px;background:#000;display:block}
+.cmp{position:relative;border-radius:16px;overflow:hidden;line-height:0;background:#000;--p:50%;user-select:none}
 .cmp img{width:100%;display:block}
 .cmp .clip{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--p)) 0 0)}
 .cmp .clip img{height:100%;object-fit:cover}
-.cmp .bar{position:absolute;top:0;bottom:0;left:var(--p);width:3px;background:#fff;box-shadow:0 0 8px rgba(0,0,0,.4)}
-.cmp .bar:after{content:"⇆";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:#fff;color:#10222f;display:grid;place-items:center;line-height:1;font-size:1.1rem;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.cmp .bar{position:absolute;top:0;bottom:0;left:var(--p);width:3px;background:#fff;box-shadow:0 0 8px rgba(0,0,0,.5)}
+.cmp .bar:after{content:"⇆";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:#fff;color:#1a0a40;display:grid;place-items:center;line-height:1;font-size:1.1rem}
 .cmp input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize}
-.tag{position:absolute;top:10px;padding:3px 12px;border-radius:999px;background:rgba(0,0,0,.6);color:#fff;font-size:.8rem;font-weight:600;line-height:1.5}
+.tag{position:absolute;bottom:10px;padding:3px 14px;border-radius:999px;background:rgba(0,0,0,.65);color:#fff;font-size:.8rem;font-weight:600;line-height:1.6}
 .vids{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .vids figure{line-height:1}
 .vids video{width:100%;border-radius:14px;background:#000}
 .vids figcaption{font-size:.85rem;color:var(--mut);margin-top:8px;font-weight:600}
 .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-.btn{display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 22px;border-radius:999px;font-weight:600;text-decoration:none;border:0;background:var(--pri);color:#fff}
-.btn.alt{background:var(--soft);color:var(--pri)}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:10px 0 0}
-.steps div{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}
-.steps b{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--soft);color:var(--pri);margin-bottom:10px}
-.steps h3{font-size:1.05rem;margin-bottom:4px}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 22px;border-radius:999px;font-weight:600;border:0;background:linear-gradient(135deg,#6d28d9,#9d5cff);color:#fff}
+.btn.alt{background:rgba(124,58,237,.25)}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.why div{background:rgba(10,5,30,.45);border:1px solid var(--line);border-radius:16px;padding:14px 12px;font-size:.85rem;color:var(--mut);line-height:1.4}
+.why svg{font-size:26px;color:var(--pri2);display:block;margin-bottom:8px}
+.why b{display:block;color:var(--ink);margin-bottom:2px}
+#cara{margin-top:26px}
+#cara h2{font-size:1.6rem;font-weight:800;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.steps div{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px}
+.steps b{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:rgba(124,58,237,.3);color:#d9bfff;margin-bottom:10px}
+.steps h3{font-size:1.05rem}
 .steps p{color:var(--mut);font-size:.95rem}
-h2.sec{font-size:1.6rem;font-weight:800;margin:0 0 6px}
-footer{margin-top:44px;border-top:1px solid var(--line);padding:24px 0 36px;color:var(--mut);font-size:.9rem;text-align:center}
-@media(max-width:640px){.steps{grid-template-columns:1fr}.vids{grid-template-columns:1fr}.menu a{padding:8px 10px;font-size:.88rem}.tool{padding:16px}}
+footer{text-align:center;color:var(--mut);font-size:.9rem;padding:30px 0 20px}
+@media(max-width:960px){
+  .shell{grid-template-columns:1fr;padding:12px;gap:14px}
+  .side{position:static;height:auto;flex-direction:row;align-items:center;gap:10px;padding:12px 14px;border-radius:20px}
+  .logo{flex-direction:row;gap:10px}
+  .logo i{width:38px;height:38px;border-radius:11px;font-size:1.1rem}
+  .logo b{font-size:1.2rem}.logo small{display:none}
+  .menu{flex-direction:row;gap:2px;overflow-x:auto;min-width:0;margin-left:auto;scrollbar-width:none}
+  .menu::-webkit-scrollbar{display:none}
+  .menu a{padding:9px 11px;font-size:.85rem}
+  .menu a svg{display:none}
+  .hero{grid-template-columns:1fr}
+  .cols{grid-template-columns:1fr;grid-template-areas:"drop" "set" "prev" "why"}
+  .steps{grid-template-columns:1fr}
+}
+@media(max-width:480px){.panel{padding:16px}.vids{grid-template-columns:1fr}.why{grid-template-columns:1fr}.menu a{padding:8px 8px;font-size:.8rem}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-<header><div class="wrap nav">
-  <a class="logo" href="#top"><i>N</i>Neel HD</a>
+<div class="shell">
+<aside class="side">
+  <a class="logo" href="#top"><i>N</i><span><b>Neel <em>HD</em></b><small>HD Upscaler</small></span></a>
   <nav class="menu" aria-label="Menu utama">
-    <a href="#tool" data-m="image" class="on">Foto HD</a>
-    <a href="#tool" data-m="video">Video HD</a>
-    <a href="#cara">Cara Pakai</a>
+    <a href="#tool" data-m="image" class="on"><svg viewBox="0 0 24 24"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5l3.5-4.5z"/></svg>Foto HD</a>
+    <a href="#tool" data-m="video"><svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8 12.5v-9l6 4.5-6 4.5z"/></svg>Video HD</a>
+    <a href="#cara"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 17h-2v-2h2v2zm2.07-7.75-.9.92A3.5 3.5 0 0 0 13 15h-2v-.5c0-1 .4-1.9 1.17-2.59l1.24-1.26A1.99 1.99 0 0 0 14 9a2 2 0 1 0-4 0H8a4 4 0 1 1 8 0c0 .88-.36 1.68-.93 2.25z"/></svg>Cara Pakai</a>
   </nav>
-</div></header>
+</aside>
 
-<main class="wrap" id="top">
+<main id="top">
   <section class="hero">
-    <h1>Ubah foto &amp; video burammu jadi <em>HD</em></h1>
-    <p>Unggah file, pilih kualitas, lalu klik satu tombol. Hasilnya bisa dibandingkan langsung dengan aslinya dan diunduh.</p>
+    <div>
+      <small>Buat foto &amp; videomu</small>
+      <h1><em>Super Jernih</em> dalam Hitungan Detik</h1>
+      <p>Peningkat kualitas HD: tajamkan dan perbaiki foto serta video, lalu bandingkan hasilnya langsung dengan aslinya.</p>
+    </div>
+    <div class="art"><svg viewBox="0 0 400 220" role="img" aria-label="Ilustrasi gerbang torii di bawah bulan"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b1a8f"/><stop offset="1" stop-color="#12062f"/></linearGradient><radialGradient id="m"><stop offset="0" stop-color="#f3dcff"/><stop offset="1" stop-color="#b36bff"/></radialGradient></defs><rect width="400" height="220" fill="url(#g)"/><circle cx="270" cy="70" r="42" fill="url(#m)"/><g fill="#1a0a40"><path d="M0 180Q80 140 160 175T400 160V220H0z"/><rect x="95" y="100" width="10" height="82"/><rect x="155" y="100" width="10" height="82"/><path d="M80 98h100l-8-14H88z"/><rect x="92" y="116" width="76" height="7"/></g><g fill="#fff" opacity=".8"><circle cx="40" cy="30" r="1.5"/><circle cx="120" cy="50" r="1"/><circle cx="350" cy="30" r="1.5"/><circle cx="200" cy="25" r="1"/></g></svg>
+    <div class="badge">Video hingga<b>4K</b></div></div>
   </section>
 
-  <section class="tool" id="tool" aria-label="Alat peningkat kualitas">
-    <div class="seg" role="tablist">
-      <button class="on" data-m="image" role="tab">Foto HD</button>
-      <button data-m="video" role="tab">Video HD</button>
-    </div>
+  <div class="cols" id="tool">
+    <section class="panel a-drop">
+      <div class="drop" id="drop">
+        <div id="dz"></div>
+        <label class="pick" for="file" id="pk">Pilih File</label>
+        <p class="hint" id="hint"></p>
+      </div>
+      <input id="file" type="file" hidden>
+      <div class="or">atau tempel link</div>
+      <input id="link" type="url" placeholder="https://contoh.com/foto.jpg" aria-label="Link file">
+    </section>
 
-    <p class="step"><b>1</b> <span id="t1">Pilih foto</span></p>
-    <label class="drop" id="drop" for="file">
-      <div id="dz"><strong>Klik atau seret file ke sini</strong><small id="hint">JPG, PNG, WEBP • maksimal 10 MB</small></div>
-    </label>
-    <input id="file" type="file" hidden>
-    <div class="or">atau tempel link</div>
-    <input id="link" type="url" placeholder="https://contoh.com/foto.jpg" aria-label="Link file">
+    <section class="panel a-set">
+      <h2><svg viewBox="0 0 24 24"><path d="M19.14 12.94a7 7 0 0 0 0-1.88l2.03-1.58-2-3.46-2.39.96a7 7 0 0 0-1.62-.94L14.8 3h-4l-.36 2.54c-.58.24-1.12.55-1.62.94l-2.39-.96-2 3.46 2.03 1.58a7 7 0 0 0 0 1.88l-2.03 1.58 2 3.46 2.39-.96c.5.39 1.04.7 1.62.94l.36 2.54h4l.36-2.54c.58-.24 1.12-.55 1.62-.94l2.39.96 2-3.46zM12.8 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z"/></svg>Pengaturan</h2>
+      <div id="iset" class="note">Mode foto bekerja otomatis: tidak ada pengaturan tambahan. Tinggal pilih foto lalu mulai.</div>
+      <div id="vset" hidden><p class="lab">Resolusi video</p>
+        <div class="q" id="q"><button type="button" data-r="720p">720p</button><button type="button" data-r="1080p">1080p</button><button type="button" data-r="2k">2K</button><button type="button" data-r="4k" class="on">4K</button></div>
+      </div>
+      <button class="go" id="go" type="button"><span>Mulai Tingkatkan</span><svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg></button>
+      <div id="status" aria-live="polite"></div>
+    </section>
 
-    <div class="row" id="resRow" hidden>
-      <div><p class="step"><b>2</b> Pilih resolusi</p>
-      <select id="res" aria-label="Resolusi"><option value="720p">HD 720p</option><option value="1080p">Full HD 1080p</option><option value="2k">2K</option><option value="4k" selected>4K Ultra HD</option></select></div>
-    </div>
+    <section class="panel a-prev">
+      <h2><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>Pratinjau</h2>
+      <div id="pv"></div>
+    </section>
 
-    <div class="row"><button class="go" id="go" type="button"><span id="gt">Jadikan HD</span></button></div>
-    <div id="status" aria-live="polite"></div>
-    <div id="out"></div>
-  </section>
+    <section class="panel a-why">
+      <h2><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>Kenapa Neel HD?</h2>
+      <div class="why">
+        <div><svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg><b>Sekali klik</b>Tanpa pengaturan rumit</div>
+        <div><svg viewBox="0 0 24 24"><path d="M9 3 5 6.99h3V14h2V6.99h3L9 3zm7 14.01V10h-2v7.01h-3L15 21l4-3.99h-3z"/></svg><b>Bandingkan</b>Geser untuk lihat bedanya</div>
+        <div><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg><b>Unduh mudah</b>Simpan hasil HD</div>
+      </div>
+    </section>
+  </div>
 
-  <section id="cara" style="padding-top:8px">
-    <h2 class="sec">Cara pakai</h2>
+  <section id="cara">
+    <h2>Cara pakai</h2>
     <div class="steps">
       <div><b>1</b><h3>Pilih file</h3><p>Unggah dari perangkatmu atau tempel link foto atau video.</p></div>
-      <div><b>2</b><h3>Klik “Jadikan HD”</h3><p>Tunggu sebentar. Video biasanya lebih lama dari foto.</p></div>
+      <div><b>2</b><h3>Klik “Mulai Tingkatkan”</h3><p>Tunggu sebentar. Video biasanya lebih lama dari foto.</p></div>
       <div><b>3</b><h3>Bandingkan &amp; unduh</h3><p>Geser garis pembanding untuk melihat bedanya, lalu simpan hasilnya.</p></div>
     </div>
   </section>
+  <footer>Neel HD • Hasil terbaik didapat dari file yang tidak terlalu gelap atau goyang.</footer>
 </main>
-<footer><div class="wrap">Neel HD • Hasil terbaik didapat dari file yang tidak terlalu gelap atau goyang.</div></footer>
+</div>
 
 <script>
 const CFG={
   apikey:"FREE",
   proxy:"/api/enhance",
-  // Nama field di bawah ini adalah tebakan; samakan dengan dokumentasi API jika berbeda.
-  image:{url:"https://api.synoxcloud.xyz/edit/hd-image",file:"image",link:"url",max:10,accept:"image/*",ph:"https://contoh.com/foto.jpg",t1:"Pilih foto",hint:"JPG, PNG, WEBP • maksimal 10 MB"},
-  video:{url:"https://api.synoxcloud.xyz/edit/hd-video",file:"video",link:"url",max:30,accept:"video/*",ph:"https://contoh.com/video.mp4",t1:"Pilih video",hint:"MP4, MOV, WEBM • maksimal 30 MB (video besar: pakai link)"}
+  // Nama field ini tebakan; samakan dengan dokumentasi API jika berbeda.
+  image:{url:"https://api.synoxcloud.xyz/edit/hd-image",file:"image",link:"url",max:3,ph:"https://contoh.com/foto.jpg",hint:"Mendukung JPG, PNG, WEBP • maks. 3 MB"},
+  video:{url:"https://api.synoxcloud.xyz/edit/hd-video",file:"video",link:"url",max:3,ph:"https://contoh.com/video.mp4",hint:"Mendukung MP4, MOV, WEBM • maks. 3 MB (video besar: pakai link)"}
 };
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-let mode="image",file=null,pvUrl="";
+const CLOUD='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.35 10.04A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>';
+let mode="image",file=null,pvUrl="",res="4k";
 
+function dz(){
+  $("#dz").innerHTML=file
+    ?`${mode==="image"?`<img class="pvi" src="${pvUrl}" alt="Pratinjau">`:`<video class="pvi" src="${pvUrl}" muted playsinline></video>`}<strong>${esc(file.name)}</strong><small>${(file.size/1048576).toFixed(1)} MB</small>`
+    :`<div>${CLOUD}</div><strong>Seret &amp; lepas file di sini</strong><small>atau</small>`;
+  $("#pk").textContent=file?"Ganti File":"Pilih File";
+}
+function pv(html){$("#pv").innerHTML=html||`<div class="ph">Pratinjau akan muncul di sini</div>`}
 function setMode(m){
   mode=m;const c=CFG[m];
-  document.querySelectorAll("[data-m]").forEach(b=>b.classList.toggle("on",b.dataset.m===m));
-  $("#file").accept=c.accept;$("#link").placeholder=c.ph;$("#t1").textContent=c.t1;
-  $("#resRow").hidden=m!=="video";
-  clearFile();$("#link").value="";$("#out").innerHTML="";$("#status").innerHTML="";
+  document.querySelectorAll(".menu [data-m]").forEach(b=>b.classList.toggle("on",b.dataset.m===m));
+  $("#file").accept=m+"/*";$("#link").placeholder=c.ph;$("#hint").textContent=c.hint;
+  $("#vset").hidden=m!=="video";$("#iset").hidden=m!=="image";
+  clearFile();$("#link").value="";$("#status").innerHTML="";pv();
 }
-function clearFile(){file=null;if(pvUrl)URL.revokeObjectURL(pvUrl);pvUrl="";$("#file").value="";
-  $("#dz").innerHTML=`<strong>Klik atau seret file ke sini</strong><small>${esc(CFG[mode].hint)}</small>`}
+function clearFile(){file=null;if(pvUrl)URL.revokeObjectURL(pvUrl);pvUrl="";$("#file").value="";dz()}
 function pick(f){
-  if(!f)return;
-  const c=CFG[mode];
+  if(!f)return;const c=CFG[mode];
   if(!f.type.startsWith(mode+"/"))return say("Jenis file tidak cocok. Pilih "+(mode==="image"?"foto":"video")+".",true);
-  if(f.size>c.max*1048576)return say("File terlalu besar (maks "+c.max+" MB). Coba tempel link saja.",true);
-  file=f;pvUrl=URL.createObjectURL(f);$("#status").innerHTML="";
-  const pv=mode==="image"?`<img class="pv" src="${pvUrl}" alt="Pratinjau">`:`<video class="pv" src="${pvUrl}" muted playsinline></video>`;
-  $("#dz").innerHTML=`${pv}<strong>${esc(f.name)}</strong><small>${(f.size/1048576).toFixed(1)} MB • klik untuk ganti</small>`;
+  if(f.size>c.max*1048576)return say("File lebih dari "+c.max+" MB. Tempel link file-nya saja di kolom link.",true);
+  if(pvUrl)URL.revokeObjectURL(pvUrl);
+  file=f;pvUrl=URL.createObjectURL(f);$("#status").innerHTML="";dz();
+  pv(`<div class="o">${mode==="image"?`<img src="${pvUrl}" alt="Foto asli">`:`<video src="${pvUrl}" controls playsinline></video>`}</div>`);
 }
-function say(t,err,raw){
-  $("#status").innerHTML=`<div class="msg${err?" err":""}">${esc(t)}${raw?`<details><summary>Lihat respons server</summary><pre>${esc(raw)}</pre></details>`:""}</div>`;
-}
+function say(t,err,raw){$("#status").innerHTML=`<div class="msg${err?" err":""}">${esc(t)}${raw?`<details><summary>Lihat respons server</summary><pre>${esc(raw)}</pre></details>`:""}</div>`}
 const toData=f=>new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok(r.result);r.onerror=()=>no(new Error("Gagal membaca file"));r.readAsDataURL(f)});
+const post=(u,b)=>fetch(u,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)});
 
 async function send(url,payload){
-  const opt=b=>({method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)});
-  try{return await fetch(url,opt(payload))}
-  catch{return fetch(CFG.proxy,opt({target:url,payload}))}
+  try{return await post(url,payload)}catch{return post(CFG.proxy,{target:url,payload})}
 }
 function findUrl(o){
   if(typeof o==="string")return /^(https?:\/\/|data:(image|video)\/)/.test(o)?o:"";
   if(o&&typeof o==="object")for(const v of Object.values(o)){const u=findUrl(v);if(u)return u}
   return "";
 }
-async function parse(res){
-  const ct=res.headers.get("content-type")||"";
-  if(/^(image|video)\//.test(ct)||ct.includes("octet-stream")){
-    const b=await res.blob();return{url:URL.createObjectURL(b),raw:"(file "+ct+")"};
-  }
-  const t=await res.text();
+async function parse(r){
+  const ct=r.headers.get("content-type")||"";
+  if(/^(image|video)\//.test(ct)||ct.includes("octet-stream")){const b=await r.blob();return{url:URL.createObjectURL(b),raw:"(file "+ct+")"}}
+  const t=await r.text();
   try{const j=JSON.parse(t);return{url:findUrl(j),raw:JSON.stringify(j,null,2).slice(0,1500)}}
   catch{return{url:"",raw:t.slice(0,600)}}
 }
@@ -191,39 +248,42 @@ async function parse(res){
 async function run(){
   const c=CFG[mode],link=$("#link").value.trim();
   if(!file&&!link)return say("Pilih file atau tempel link dulu.",true);
-  $("#go").disabled=true;$("#go").innerHTML=`<span class="spin"></span> Memproses…`;
+  const go=$("#go");go.disabled=true;go.innerHTML=`<span class="spin"></span> Memproses…`;
   say(mode==="video"?"Video sedang diproses, ini bisa memakan beberapa menit. Jangan tutup halaman.":"Foto sedang diproses…");
-  $("#out").innerHTML="";
   try{
-    const body={apikey:CFG.apikey};
-    if(mode==="video")body.resolution=$("#res").value;
-    if(file)body[c.file]=await toData(file);else body[c.link]=link;
-    const res=await send(c.url,body),r=await parse(res);
-    if(!res.ok||!r.url){say(res.ok?"Server tidak mengirim hasil yang bisa ditampilkan.":"Server menolak permintaan (kode "+res.status+").",true,r.raw);return}
-    $("#status").innerHTML="";show(r.url,file?pvUrl:link);
+    const payload={apikey:CFG.apikey},fields=[c.link,c.file];
+    if(mode==="video")payload.resolution=res;
+    let r;
+    if(file)r=await post(CFG.proxy,{target:c.url,payload,fields,upload:{name:file.name,type:file.type,data:await toData(file)}});
+    else{fields.forEach(f=>payload[f]=link);r=await send(c.url,payload)}
+    const o=await parse(r);
+    if(!r.ok||!o.url){say(r.ok?"Server tidak mengirim hasil yang bisa ditampilkan.":"Server menolak permintaan (kode "+r.status+").",true,o.raw);return}
+    $("#status").innerHTML="";show(o.url,file?pvUrl:link);
   }catch(e){say("Gagal memproses: "+e.message,true)}
-  finally{$("#go").disabled=false;$("#go").innerHTML="<span>Jadikan HD</span>"}
+  finally{go.disabled=false;go.innerHTML='<span>Mulai Tingkatkan</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>'}
 }
 
 function show(after,before){
-  const dl=`<div class="acts"><a class="btn" href="${esc(after)}" download="neelhd-${mode}" target="_blank" rel="noopener">Unduh hasil HD</a><button class="btn alt" id="again" type="button">Proses file lain</button></div>`;
+  const acts=`<div class="acts"><a class="btn" href="${esc(after)}" download="neelhd-${mode}" target="_blank" rel="noopener">Unduh hasil HD</a><button class="btn alt" id="again" type="button">Proses file lain</button></div>`;
   if(mode==="image"){
-    $("#out").innerHTML=`<h2>Hasil: geser untuk membandingkan</h2><div class="cmp" id="cmp"><img src="${esc(after)}" alt="Hasil HD"><div class="clip"><img src="${esc(before)}" alt="Foto asli"></div><span class="tag" style="left:10px">Asli</span><span class="tag" style="right:10px">HD</span><div class="bar"></div><input type="range" min="0" max="100" value="50" aria-label="Geser pembanding"></div>${dl}`;
+    pv(`<div class="cmp" id="cmp"><img src="${esc(after)}" alt="Hasil HD"><div class="clip"><img src="${esc(before)}" alt="Foto asli"></div><span class="tag" style="left:10px">Sebelum</span><span class="tag" style="right:10px">Sesudah</span><div class="bar"></div><input type="range" min="0" max="100" value="50" aria-label="Geser pembanding"></div>${acts}`);
     $("#cmp input").oninput=e=>$("#cmp").style.setProperty("--p",e.target.value+"%");
   }else{
-    $("#out").innerHTML=`<h2>Hasil video</h2><div class="vids"><figure><video src="${esc(before)}" controls playsinline></video><figcaption>Asli</figcaption></figure><figure><video src="${esc(after)}" controls playsinline></video><figcaption>HD</figcaption></figure></div>${dl}`;
+    pv(`<div class="vids"><figure><video src="${esc(before)}" controls playsinline></video><figcaption>Sebelum</figcaption></figure><figure><video src="${esc(after)}" controls playsinline></video><figcaption>Sesudah (HD)</figcaption></figure></div>${acts}`);
   }
-  $("#again").onclick=()=>{clearFile();$("#link").value="";$("#out").innerHTML="";scrollTo({top:$("#tool").offsetTop-70,behavior:"smooth"})};
-  $("#out").scrollIntoView({behavior:"smooth",block:"nearest"});
+  $("#again").onclick=()=>{clearFile();$("#link").value="";pv();$("#tool").scrollIntoView({behavior:"smooth"})};
+  $("#pv").scrollIntoView({behavior:"smooth",block:"nearest"});
 }
 
-document.querySelectorAll("[data-m]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.m)));
+document.querySelectorAll(".menu [data-m]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.m)));
+$("#q").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;res=b.dataset.r;document.querySelectorAll("#q button").forEach(x=>x.classList.toggle("on",x===b))});
 $("#file").addEventListener("change",e=>pick(e.target.files[0]));
-const dz=$("#drop");
-["dragenter","dragover"].forEach(t=>dz.addEventListener(t,e=>{e.preventDefault();dz.classList.add("over")}));
-["dragleave","drop"].forEach(t=>dz.addEventListener(t,e=>{e.preventDefault();dz.classList.remove("over")}));
-dz.addEventListener("drop",e=>pick(e.dataTransfer.files[0]));
+const d=$("#drop");
+["dragenter","dragover"].forEach(t=>d.addEventListener(t,e=>{e.preventDefault();d.classList.add("over")}));
+["dragleave","drop"].forEach(t=>d.addEventListener(t,e=>{e.preventDefault();d.classList.remove("over")}));
+d.addEventListener("drop",e=>pick(e.dataTransfer.files[0]));
 $("#go").addEventListener("click",run);
+setMode("image");
 </script>
 </body>
 </html>
