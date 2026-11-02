@@ -194,8 +194,8 @@ const CFG={
   apikey:"FREE",
   proxy:"/api/enhance",
   // Nama field ini tebakan; samakan dengan dokumentasi API jika berbeda.
-  image:{url:"https://api.synoxcloud.xyz/edit/hd-image",file:"image",link:"url",max:3,ph:"https://contoh.com/foto.jpg",hint:"Mendukung JPG, PNG, WEBP • maks. 3 MB"},
-  video:{url:"https://api.synoxcloud.xyz/edit/hd-video",file:"video",link:"url",max:3,ph:"https://contoh.com/video.mp4",hint:"Mendukung MP4, MOV, WEBM • maks. 3 MB (video besar: pakai link)"}
+  image:{url:"https://api.synoxcloud.xyz/edit/hd-image",fields:["image","file","photo"],max:3,ph:"https://contoh.com/foto.jpg",hint:"Mendukung JPG, PNG, WEBP • maks. 3 MB"},
+  video:{url:"https://api.synoxcloud.xyz/edit/hd-video",fields:["video","file"],max:3,ph:"https://contoh.com/video.mp4",hint:"Mendukung MP4, MOV, WEBM • maks. 3 MB (video besar: pakai link)"}
 };
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -251,11 +251,9 @@ async function run(){
   const go=$("#go");go.disabled=true;go.innerHTML=`<span class="spin"></span> Memproses…`;
   say(mode==="video"?"Video sedang diproses, ini bisa memakan beberapa menit. Jangan tutup halaman.":"Foto sedang diproses…");
   try{
-    const payload={apikey:CFG.apikey},fields=[c.link,c.file];
+    const payload={apikey:CFG.apikey},fields=c.fields;
     if(mode==="video")payload.resolution=res;
-    let r;
-    if(file)r=await post(CFG.proxy,{target:c.url,payload,fields,upload:{name:file.name,type:file.type,data:await toData(file)}});
-    else{fields.forEach(f=>payload[f]=link);r=await send(c.url,payload)}
+    const r=await post(CFG.proxy,file?{target:c.url,payload,fields,upload:{name:file.name,type:file.type,data:await toData(file)}}:{target:c.url,payload,fields,link});
     const o=await parse(r);
     if(!r.ok||!o.url){say(r.ok?"Server tidak mengirim hasil yang bisa ditampilkan.":"Server menolak permintaan (kode "+r.status+").",true,o.raw);return}
     $("#status").innerHTML="";show(o.url,file?pvUrl:link);
