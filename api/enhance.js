@@ -1,44 +1,44 @@
-// Proxy Neel HD: (1) menghindari blokir CORS, (2) mengunggah file sementara agar API cukup menerima link.
-async function host(buf, name, type) {
-  try {
-    const f = new FormData();
-    f.append("reqtype", "fileupload");
-    f.append("fileToUpload", new Blob([buf], { type }), name);
-    const r = await fetch("https://catbox.moe/user/api.php", { method: "POST", body: f });
-    const t = (await r.text()).trim();
-    if (/^https?:\/\//.test(t)) return t;
-  } catch (e) {}
-  try {
-    const f = new FormData();
-    f.append("file", new Blob([buf], { type }), name);
-    const r = await fetch("https://tmpfiles.org/api/v1/upload", { method: "POST", body: f });
-    const u = (await r.json())?.data?.url;
-    if (u) return u.replace("tmpfiles.org/", "tmpfiles.org/dl/");
-  } catch (e) {}
-  throw new Error("Gagal mengunggah file sementara");
-}
+// Proxy Neel HD: menerima file (atau link), lalu meneruskannya ke API HD sebagai multipart/form-data.
+const clean = (s) => String(s || "file").replace(/[^\w.\-]/g, "_");
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") return res.status(405).json({ error: "Gunakan POST" });
-  const { target, payload = {}, fields = [], upload } = req.body || {};
+  const { target, payload = {}, fields = ["file"], upload, link } = req.body || {};
   if (!String(target || "").startsWith("https://api.synoxcloud.xyz/")) {
-    return res.status(400).json({ error: "Target tidak diizinkan" });
+    return res.status(400).json({ status: false, message: "Target tidak diizinkan" });
   }
   try {
+    let buf, name, type;
     if (upload?.data) {
-      const buf = Buffer.from(String(upload.data).split(",")[1] || "", "base64");
-      const name = String(upload.name || "file").replace(/[^\w.\-]/g, "_");
-      const url = await host(buf, name, upload.type || "application/octet-stream");
-      fields.forEach((k) => (payload[k] = url));
+      buf = Buffer.from(String(upload.data).split(",")[1] || "", "base64");
+      name = clean(upload.name);
+      type = upload.type || "application/octet-stream";
+    } else if (/^https?:\/\//.test(link || "")) {
+      const d = await fetch(link, { redirect: "follow" });
+      if (!d.ok) return res.status(400).json({ status: false, message: "Link tidak bisa diunduh (kode " + d.status + ")" });
+      type = (d.headers.get("content-type") || "application/octet-stream").split(";")[0];
+      buf = Buffer.from(await d.arrayBuffer());
+      name = clean(new URL(link).pathname.split("/").pop());
+    } else {
+      return res.status(400).json({ status: false, message: "File atau link diperlukan" });
     }
-    const r = await fetch(target, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    const ct = r.headers.get("content-type") || "application/json";
-    res.status(r.status).setHeader("Content-Type", ct);
-    res.send(Buffer.from(await r.arrayBuffer()));
+
+    const url = target + (target.includes("?") ? "&" : "?") + "apikey=" + encodeURIComponent(payload.apikey || "");
+    let last;
+    for (const field of fields) {
+      const f = new FormData();
+      for (const [k, v] of Object.entries(payload)) f.append(k, String(v));
+      f.append(field, new Blob([buf], { type }), name);
+      const r = await fetch(url, { method: "POST", body: f });
+      last = {
+        status: r.status,
+        ct: r.headers.get("content-type") || "application/json",
+        out: Buffer.from(await r.arrayBuffer()),
+      };
+      if (r.ok) break;
+    }
+    res.status(last.status).setHeader("Content-Type", last.ct);
+    res.send(last.out);
   } catch (e) {
     res.status(502).json({ status: false, message: e.message });
   }
