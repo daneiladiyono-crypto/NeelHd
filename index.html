@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Neel HD – Ubah Foto &amp; Video Jadi HD</title>
+<meta name="description" content="Tingkatkan kualitas foto dan video menjadi HD hanya dengan beberapa klik.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f6f9;--card:#fff;--ink:#10222f;--mut:#5d7080;--line:#dde5ec;--pri:#0b7f82;--pri2:#1c64a8;--soft:#e2f2f2;--ok:#117a4d;--bad:#b3261e;--shadow:0 10px 30px rgba(16,34,47,.08)}
+@media(prefers-color-scheme:dark){:root{--bg:#0c1720;--card:#132430;--ink:#e8f1f6;--mut:#93a8b6;--line:#23394a;--pri:#2fb9b5;--pri2:#4a9be0;--soft:#17343a;--ok:#5fd6a0;--bad:#ff8a80;--shadow:0 10px 30px rgba(0,0,0,.35)}}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 "Plus Jakarta Sans",system-ui,sans-serif;padding-bottom:env(safe-area-inset-bottom)}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--pri);outline-offset:2px}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;height:62px}
+.logo{font-weight:800;font-size:1.3rem;text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo i{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--pri),var(--pri2));display:grid;place-items:center;color:#fff;font:800 .8rem/1 "Plus Jakarta Sans";font-style:normal}
+.menu{display:flex;gap:4px}
+.menu a{padding:8px 14px;border-radius:999px;text-decoration:none;font-weight:600;font-size:.95rem;color:var(--mut)}
+.menu a:hover,.menu a.on{background:var(--soft);color:var(--pri)}
+.hero{text-align:center;padding:44px 0 26px}
+.hero h1{font-weight:800;font-size:clamp(1.9rem,5.5vw,3rem);line-height:1.15;letter-spacing:-.02em;max-width:18ch;margin:0 auto 14px}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--pri),var(--pri2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--mut);max-width:52ch;margin:0 auto}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:22px;margin-bottom:34px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--bg);border-radius:16px;padding:5px;margin-bottom:20px}
+.seg button{border:0;background:none;padding:12px;border-radius:12px;font-weight:600;color:var(--mut)}
+.seg button.on{background:var(--card);color:var(--pri);box-shadow:0 2px 8px rgba(16,34,47,.12)}
+.step{display:flex;align-items:center;gap:10px;font-weight:600;margin:0 0 10px}
+.step b{width:26px;height:26px;border-radius:50%;background:var(--pri);color:#fff;display:grid;place-items:center;font-size:.8rem}
+[hidden]{display:none!important}
+.drop{display:block;border:2px dashed var(--line);border-radius:18px;padding:28px 16px;text-align:center;cursor:pointer;background:var(--bg);transition:.15s}
+.drop:hover,.drop.over{border-color:var(--pri);background:var(--soft)}
+.drop strong{display:block;font-size:1.05rem}
+.drop small{color:var(--mut)}
+.drop .pv{max-height:180px;max-width:100%;border-radius:12px;margin-bottom:10px}
+.or{display:flex;align-items:center;gap:12px;color:var(--mut);font-size:.85rem;margin:14px 0}
+.or:before,.or:after{content:"";flex:1;height:1px;background:var(--line)}
+input[type=url],select{width:100%;height:48px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);padding:0 14px}
+.row{display:grid;gap:14px;margin-top:22px}
+.go{width:100%;height:56px;border:0;border-radius:16px;background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;font-weight:800;font-size:1.05rem;display:flex;justify-content:center;align-items:center;gap:10px}
+.go:disabled{opacity:.6;cursor:wait}
+.spin{width:20px;height:20px;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.msg{margin-top:14px;padding:12px 16px;border-radius:12px;background:var(--soft);font-size:.95rem}
+.msg.err{background:color-mix(in srgb,var(--bad) 12%,transparent);color:var(--bad)}
+details{margin-top:8px;font-size:.85rem;color:var(--mut)}
+pre{white-space:pre-wrap;word-break:break-all;background:var(--bg);padding:10px;border-radius:10px;margin-top:6px;max-height:160px;overflow:auto}
+#out{margin-top:22px}
+#out h2{font-size:1.2rem;margin-bottom:12px}
+.cmp{position:relative;border-radius:16px;overflow:hidden;line-height:0;background:var(--bg);--p:50%;user-select:none}
+.cmp img{width:100%;display:block}
+.cmp .clip{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--p)) 0 0)}
+.cmp .clip img{height:100%;object-fit:cover}
+.cmp .bar{position:absolute;top:0;bottom:0;left:var(--p);width:3px;background:#fff;box-shadow:0 0 8px rgba(0,0,0,.4)}
+.cmp .bar:after{content:"⇆";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:#fff;color:#10222f;display:grid;place-items:center;line-height:1;font-size:1.1rem;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.cmp input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize}
+.tag{position:absolute;top:10px;padding:3px 12px;border-radius:999px;background:rgba(0,0,0,.6);color:#fff;font-size:.8rem;font-weight:600;line-height:1.5}
+.vids{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.vids figure{line-height:1}
+.vids video{width:100%;border-radius:14px;background:#000}
+.vids figcaption{font-size:.85rem;color:var(--mut);margin-top:8px;font-weight:600}
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 22px;border-radius:999px;font-weight:600;text-decoration:none;border:0;background:var(--pri);color:#fff}
+.btn.alt{background:var(--soft);color:var(--pri)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:10px 0 0}
+.steps div{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}
+.steps b{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--soft);color:var(--pri);margin-bottom:10px}
+.steps h3{font-size:1.05rem;margin-bottom:4px}
+.steps p{color:var(--mut);font-size:.95rem}
+h2.sec{font-size:1.6rem;font-weight:800;margin:0 0 6px}
+footer{margin-top:44px;border-top:1px solid var(--line);padding:24px 0 36px;color:var(--mut);font-size:.9rem;text-align:center}
+@media(max-width:640px){.steps{grid-template-columns:1fr}.vids{grid-template-columns:1fr}.menu a{padding:8px 10px;font-size:.88rem}.tool{padding:16px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="logo" href="#top"><i>N</i>Neel HD</a>
+  <nav class="menu" aria-label="Menu utama">
+    <a href="#tool" data-m="image" class="on">Foto HD</a>
+    <a href="#tool" data-m="video">Video HD</a>
+    <a href="#cara">Cara Pakai</a>
+  </nav>
+</div></header>
+
+<main class="wrap" id="top">
+  <section class="hero">
+    <h1>Ubah foto &amp; video burammu jadi <em>HD</em></h1>
+    <p>Unggah file, pilih kualitas, lalu klik satu tombol. Hasilnya bisa dibandingkan langsung dengan aslinya dan diunduh.</p>
+  </section>
+
+  <section class="tool" id="tool" aria-label="Alat peningkat kualitas">
+    <div class="seg" role="tablist">
+      <button class="on" data-m="image" role="tab">Foto HD</button>
+      <button data-m="video" role="tab">Video HD</button>
+    </div>
+
+    <p class="step"><b>1</b> <span id="t1">Pilih foto</span></p>
+    <label class="drop" id="drop" for="file">
+      <div id="dz"><strong>Klik atau seret file ke sini</strong><small id="hint">JPG, PNG, WEBP • maksimal 10 MB</small></div>
+    </label>
+    <input id="file" type="file" hidden>
+    <div class="or">atau tempel link</div>
+    <input id="link" type="url" placeholder="https://contoh.com/foto.jpg" aria-label="Link file">
+
+    <div class="row" id="resRow" hidden>
+      <div><p class="step"><b>2</b> Pilih resolusi</p>
+      <select id="res" aria-label="Resolusi"><option value="720p">HD 720p</option><option value="1080p">Full HD 1080p</option><option value="2k">2K</option><option value="4k" selected>4K Ultra HD</option></select></div>
+    </div>
+
+    <div class="row"><button class="go" id="go" type="button"><span id="gt">Jadikan HD</span></button></div>
+    <div id="status" aria-live="polite"></div>
+    <div id="out"></div>
+  </section>
+
+  <section id="cara" style="padding-top:8px">
+    <h2 class="sec">Cara pakai</h2>
+    <div class="steps">
+      <div><b>1</b><h3>Pilih file</h3><p>Unggah dari perangkatmu atau tempel link foto atau video.</p></div>
+      <div><b>2</b><h3>Klik “Jadikan HD”</h3><p>Tunggu sebentar. Video biasanya lebih lama dari foto.</p></div>
+      <div><b>3</b><h3>Bandingkan &amp; unduh</h3><p>Geser garis pembanding untuk melihat bedanya, lalu simpan hasilnya.</p></div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">Neel HD • Hasil terbaik didapat dari file yang tidak terlalu gelap atau goyang.</div></footer>
+
+<script>
+const CFG={
+  apikey:"FREE",
+  proxy:"/api/enhance",
+  // Nama field di bawah ini adalah tebakan; samakan dengan dokumentasi API jika berbeda.
+  image:{url:"https://api.synoxcloud.xyz/edit/hd-image",file:"image",link:"url",max:10,accept:"image/*",ph:"https://contoh.com/foto.jpg",t1:"Pilih foto",hint:"JPG, PNG, WEBP • maksimal 10 MB"},
+  video:{url:"https://api.synoxcloud.xyz/edit/hd-video",file:"video",link:"url",max:30,accept:"video/*",ph:"https://contoh.com/video.mp4",t1:"Pilih video",hint:"MP4, MOV, WEBM • maksimal 30 MB (video besar: pakai link)"}
+};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let mode="image",file=null,pvUrl="";
+
+function setMode(m){
+  mode=m;const c=CFG[m];
+  document.querySelectorAll("[data-m]").forEach(b=>b.classList.toggle("on",b.dataset.m===m));
+  $("#file").accept=c.accept;$("#link").placeholder=c.ph;$("#t1").textContent=c.t1;
+  $("#resRow").hidden=m!=="video";
+  clearFile();$("#link").value="";$("#out").innerHTML="";$("#status").innerHTML="";
+}
+function clearFile(){file=null;if(pvUrl)URL.revokeObjectURL(pvUrl);pvUrl="";$("#file").value="";
+  $("#dz").innerHTML=`<strong>Klik atau seret file ke sini</strong><small>${esc(CFG[mode].hint)}</small>`}
+function pick(f){
+  if(!f)return;
+  const c=CFG[mode];
+  if(!f.type.startsWith(mode+"/"))return say("Jenis file tidak cocok. Pilih "+(mode==="image"?"foto":"video")+".",true);
+  if(f.size>c.max*1048576)return say("File terlalu besar (maks "+c.max+" MB). Coba tempel link saja.",true);
+  file=f;pvUrl=URL.createObjectURL(f);$("#status").innerHTML="";
+  const pv=mode==="image"?`<img class="pv" src="${pvUrl}" alt="Pratinjau">`:`<video class="pv" src="${pvUrl}" muted playsinline></video>`;
+  $("#dz").innerHTML=`${pv}<strong>${esc(f.name)}</strong><small>${(f.size/1048576).toFixed(1)} MB • klik untuk ganti</small>`;
+}
+function say(t,err,raw){
+  $("#status").innerHTML=`<div class="msg${err?" err":""}">${esc(t)}${raw?`<details><summary>Lihat respons server</summary><pre>${esc(raw)}</pre></details>`:""}</div>`;
+}
+const toData=f=>new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok(r.result);r.onerror=()=>no(new Error("Gagal membaca file"));r.readAsDataURL(f)});
+
+async function send(url,payload){
+  const opt=b=>({method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)});
+  try{return await fetch(url,opt(payload))}
+  catch{return fetch(CFG.proxy,opt({target:url,payload}))}
+}
+function findUrl(o){
+  if(typeof o==="string")return /^(https?:\/\/|data:(image|video)\/)/.test(o)?o:"";
+  if(o&&typeof o==="object")for(const v of Object.values(o)){const u=findUrl(v);if(u)return u}
+  return "";
+}
+async function parse(res){
+  const ct=res.headers.get("content-type")||"";
+  if(/^(image|video)\//.test(ct)||ct.includes("octet-stream")){
+    const b=await res.blob();return{url:URL.createObjectURL(b),raw:"(file "+ct+")"};
+  }
+  const t=await res.text();
+  try{const j=JSON.parse(t);return{url:findUrl(j),raw:JSON.stringify(j,null,2).slice(0,1500)}}
+  catch{return{url:"",raw:t.slice(0,600)}}
+}
+
+async function run(){
+  const c=CFG[mode],link=$("#link").value.trim();
+  if(!file&&!link)return say("Pilih file atau tempel link dulu.",true);
+  $("#go").disabled=true;$("#go").innerHTML=`<span class="spin"></span> Memproses…`;
+  say(mode==="video"?"Video sedang diproses, ini bisa memakan beberapa menit. Jangan tutup halaman.":"Foto sedang diproses…");
+  $("#out").innerHTML="";
+  try{
+    const body={apikey:CFG.apikey};
+    if(mode==="video")body.resolution=$("#res").value;
+    if(file)body[c.file]=await toData(file);else body[c.link]=link;
+    const res=await send(c.url,body),r=await parse(res);
+    if(!res.ok||!r.url){say(res.ok?"Server tidak mengirim hasil yang bisa ditampilkan.":"Server menolak permintaan (kode "+res.status+").",true,r.raw);return}
+    $("#status").innerHTML="";show(r.url,file?pvUrl:link);
+  }catch(e){say("Gagal memproses: "+e.message,true)}
+  finally{$("#go").disabled=false;$("#go").innerHTML="<span>Jadikan HD</span>"}
+}
+
+function show(after,before){
+  const dl=`<div class="acts"><a class="btn" href="${esc(after)}" download="neelhd-${mode}" target="_blank" rel="noopener">Unduh hasil HD</a><button class="btn alt" id="again" type="button">Proses file lain</button></div>`;
+  if(mode==="image"){
+    $("#out").innerHTML=`<h2>Hasil: geser untuk membandingkan</h2><div class="cmp" id="cmp"><img src="${esc(after)}" alt="Hasil HD"><div class="clip"><img src="${esc(before)}" alt="Foto asli"></div><span class="tag" style="left:10px">Asli</span><span class="tag" style="right:10px">HD</span><div class="bar"></div><input type="range" min="0" max="100" value="50" aria-label="Geser pembanding"></div>${dl}`;
+    $("#cmp input").oninput=e=>$("#cmp").style.setProperty("--p",e.target.value+"%");
+  }else{
+    $("#out").innerHTML=`<h2>Hasil video</h2><div class="vids"><figure><video src="${esc(before)}" controls playsinline></video><figcaption>Asli</figcaption></figure><figure><video src="${esc(after)}" controls playsinline></video><figcaption>HD</figcaption></figure></div>${dl}`;
+  }
+  $("#again").onclick=()=>{clearFile();$("#link").value="";$("#out").innerHTML="";scrollTo({top:$("#tool").offsetTop-70,behavior:"smooth"})};
+  $("#out").scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+
+document.querySelectorAll("[data-m]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.m)));
+$("#file").addEventListener("change",e=>pick(e.target.files[0]));
+const dz=$("#drop");
+["dragenter","dragover"].forEach(t=>dz.addEventListener(t,e=>{e.preventDefault();dz.classList.add("over")}));
+["dragleave","drop"].forEach(t=>dz.addEventListener(t,e=>{e.preventDefault();dz.classList.remove("over")}));
+dz.addEventListener("drop",e=>pick(e.dataTransfer.files[0]));
+$("#go").addEventListener("click",run);
+</script>
+</body>
+</html>
